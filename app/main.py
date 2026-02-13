@@ -9,12 +9,18 @@ from app.router.members import members_router
 app = FastAPI()
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware,  # type: ignore
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+def get_root():
+    return {"message": "Hello!!!!!"}
+
 
 app.include_router(books_router)
 app.include_router(members_router)
